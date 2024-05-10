@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+url=$1 
+filename=$2
+
+host=$(echo $1 | grep -o '^\http[s?]://[^/?#]*')
+
+echo $host
+echo $filename
+
+echo "Attacking endpoint: $host" > "$filename.txt" 
+
+echo "Headers and codes of endpoint: $host"; >> "$filename.txt"; 
+curl -I "$host" -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0' >> "$filename.txt";
+
+echo "URLS in this endpoint" >> "$filename.txt"; 
+curl "$host" -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0' | grep -o 'href="[^"#]*"' | awk -F '"' -v baseurl="$host" '{if ($2 !~ /^http/) print baseurl $2; else print $2}' | sort | uniq -u >> "$filename.txt"
